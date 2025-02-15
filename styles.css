@@ -1,0 +1,413 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ffe6e6, #fff0f0);
+}
+
+#petal-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto !important;
+}
+
+.petal {
+    position: absolute;
+    background-color: #ff5757;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    opacity: 0.8;
+}
+
+#ground {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    background: linear-gradient(to bottom, #d4a5a5, #9e7777);
+}
+
+.landed-petal {
+    position: absolute;
+    background-color: #ff5757;
+    border-radius: 50% 0 50% 50%;
+    transform: rotate(45deg);
+    opacity: 0.8;
+    transition: transform 0.5s ease;
+}
+
+.paper {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    animation: glow 2s ease-in-out infinite;
+    pointer-events: auto !important;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 87, 87, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 87, 87, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 87, 87, 0.5);
+    }
+}
+
+.paper:hover {
+    transform: scale(1.1);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.play-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.play-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    padding: 0;
+}
+
+.play-button:hover,
+.play-button:focus {
+    transform: scale(1.1);
+    outline: none;
+}
+
+.play-button:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 87, 87, 0.5);
+}
+
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-left: 30px solid #ff5757;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    margin-left: 8px; /* Offset to center the triangle visually */
+}
+
+/* Add media queries for mobile */
+@media screen and (max-width: 768px) {
+    .paper {
+        width: 60px;  /* Smaller paper size for mobile */
+        height: 45px;
+        padding: 8px;
+    }
+    
+    .petal {
+        width: 8px;  /* Smaller petals for mobile */
+        height: 8px;
+    }
+    
+    .play-button {
+        width: 60px;  /* Smaller play button for mobile */
+        height: 60px;
+    }
+    
+    .play-triangle {
+        border-left: 22px solid #ff5757;  /* Adjust play icon size */
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        margin-left: 6px;
+    }
+    
+    .card {
+        width: 90%;  /* Wider card for mobile */
+        height: 80vh;
+    }
+}
+
+/* Add close button styling */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ff5757;
+}
+
+.card-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-overlay.active {
+    display: flex;
+}
+
+.card {
+    position: relative;
+    width: 0%;  /* Start at 0 width */
+    height: 70vh;  /* Fixed height relative to viewport */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    transform-origin: left center;
+    animation: openCard 0.75s ease-out forwards;
+    transform: scale(0);
+    opacity: 0;
+    display: flex;  /* Enable flex layout for the two sides */
+    overflow: hidden;  /* Ensure content stays within rounded corners */
+}
+
+@keyframes openCard {
+    0% {
+        width: 0%;
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    66% {
+        width: 69%;
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        width: 70%;
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to right, rgba(158, 119, 119, 0.3), rgba(158, 119, 119, 0.6), rgba(158, 119, 119, 0.3));
+    box-shadow: -1px 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    opacity: 0;
+    padding: 40px;  /* Increase padding for better spacing */
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 0.25s ease-out 0.5s forwards;
+    display: flex;
+    justify-content: flex-end;  /* Align content to the right side */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.card-overlay.active .card {
+    /* Ensure card is visible when overlay is active */
+    display: block;
+    animation: openCard 0.75s ease-out forwards;
+}
+
+/* Hide the initial Dear Baby text that's directly in the body */
+body > .dear-baby {
+    display: none;  /* This hides the initial text */
+}
+
+/* Style for the Dear Baby text inside the paper */
+.paper .dear-baby {
+    position: absolute;
+    font-size: 1rem;
+    font-family: 'Brush Script MT', cursive;
+    color: #000;
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Accessibility helper */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.letter-text {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 1.4rem;  /* Reduced from 1.8rem */
+    color: #000;
+    line-height: 1.5;
+    width: 45%;  /* Slightly reduced to ensure text fits */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-right: 20px;  /* Add some right margin */
+}
+
+/* Add typewriter animation styles */
+.typewriter {
+    overflow: hidden;
+    white-space: pre-line;  /* Preserve line breaks */
+    opacity: 0;
+}
+
+.typewriter.typing {
+    opacity: 1;
+}
+
+.signature {
+    margin-top: 20px;
+    align-self: flex-start;
+    margin-left: 40px;
+    opacity: 0;  /* Start hidden */
+    transition: opacity 0.5s ease;
+}
+
+.signature.show {
+    opacity: 1;
+}
+
+/* Heart container for left side */
+.heart-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Base heart styles */
+.heart {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: #ff5757;
+    transform-origin: center;
+    opacity: 0;
+    animation: heartBeat 4s infinite;
+}
+
+/* Set the base rotation in the custom property */
+.heart { --base-rotation: 45deg; }
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.heart::before {
+    left: -50%;  /* Changed from left: 50% */
+    top: 0;      /* Added to position circle correctly */
+}
+
+.heart::after {
+    top: -50%;
+    left: 0;
+}
+
+/* Individual hearts with different colors and animations */
+.heart:nth-child(1) {
+    background-color: #ff5757;  /* Red like petals */
+    animation-delay: 0s;
+    transform: rotate(135deg);  /* Center */
+}
+
+.heart:nth-child(2) {
+    background-color: #ff9eaa;  /* Soft pink */
+    animation-delay: 1s;
+    transform: rotate(120deg);  /* Right tilt */
+}
+
+.heart:nth-child(3) {
+    background-color: #ff7096;  /* Medium pink */
+    animation-delay: 2s;
+    transform: rotate(135deg);  /* Center */
+}
+
+.heart:nth-child(4) {
+    background-color: #ffb3c6;  /* Light pink */
+    animation-delay: 3s;
+    transform: rotate(150deg);  /* Left tilt */
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(0.8) rotate(calc(var(--base-rotation) + var(--rotation)));
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1) rotate(calc(var(--base-rotation) + var(--rotation)));
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.8) rotate(calc(var(--base-rotation) + var(--rotation)));
+        opacity: 0;
+    }
+    100% {
+        transform: scale(0.8) rotate(calc(var(--base-rotation) + var(--rotation)));
+        opacity: 0;
+    }
+}
+
+/* Keep the animation rotations */
+.heart:nth-child(1) { --rotation: 0deg; }     /* Center */
+.heart:nth-child(2) { --rotation: 15deg; }    /* Right tilt */
+.heart:nth-child(3) { --rotation: 0deg; }     /* Center */
+.heart:nth-child(4) { --rotation: -15deg; }   /* Left tilt */
