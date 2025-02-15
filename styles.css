@@ -174,19 +174,19 @@ body {
     }
     
     .heart {
-        width: 50px;       /* Reduced from 80px */
-        height: 50px;      /* Reduced from 80px */
+        width: 30px;       /* Reduced from 50px */
+        height: 30px;      /* Reduced from 50px */
     }
     
     .heart::before,
     .heart::after {
-        width: 50px;      /* Match new heart size */
-        height: 50px;     /* Match new heart size */
+        width: 30px;      /* Match new heart size */
+        height: 30px;     /* Match new heart size */
     }
     
-    /* Adjust heart container and hearts for mobile */
+    /* Adjust heart container */
     .heart-container {
-        width: 40%;        /* Reduced from 50% */
+        width: 35%;        /* Reduced from 40% */
         height: 100%;
     }
     
@@ -207,6 +207,19 @@ body {
     #petal-container {
         pointer-events: auto !important;
         touch-action: manipulation;
+    }
+
+    /* Adjust card layout */
+    .card::before {        /* This is the crease line */
+        left: 45%;        /* Move crease line left (was 50%) */
+    }
+
+    /* Give text more room */
+    .letter-text {
+        width: 95%;       /* Increased from 90% */
+        font-size: 0.85rem; /* Slightly smaller font */
+        padding: 12px;     /* Reduced padding */
+        margin-right: 10px; /* Reduced right margin */
     }
 }
 
