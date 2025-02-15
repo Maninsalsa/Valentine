@@ -134,6 +134,11 @@ body {
         width: 60px;  /* Smaller paper size for mobile */
         height: 45px;
         padding: 8px;
+        min-width: 60px;      /* Ensure minimum touch target size */
+        min-height: 60px;     /* Ensure minimum touch target size */
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        cursor: pointer;
     }
     
     .petal {
@@ -142,15 +147,18 @@ body {
     }
     
     .play-button {
-        width: 60px;  /* Smaller play button for mobile */
-        height: 60px;
+        width: 80px;          /* Increased from 60px */
+        height: 80px;         /* Increased from 60px */
+        touch-action: manipulation;  /* Optimize for touch */
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;  /* Remove tap highlight on iOS */
     }
     
     .play-triangle {
-        border-left: 22px solid #ff5757;  /* Adjust play icon size */
-        border-top: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        margin-left: 6px;
+        border-left: 25px solid #ff5757;    /* Slightly larger */
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        margin-left: 8px;
     }
     
     .card {
@@ -187,6 +195,18 @@ body {
         font-size: 0.9rem;
         margin-top: 10px;
         margin-left: 20px;
+    }
+
+    /* Ensure overlay is clickable */
+    .play-overlay {
+        pointer-events: auto !important;
+        touch-action: manipulation;
+    }
+
+    /* Ensure container doesn't block touches */
+    #petal-container {
+        pointer-events: auto !important;
+        touch-action: manipulation;
     }
 }
 
