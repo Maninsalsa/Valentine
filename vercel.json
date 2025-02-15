@@ -7,9 +7,15 @@
     { "src": "*.mp3", "use": "@vercel/static" }
   ],
   "routes": [
+    { 
+      "src": "/TMWYHI.mp3",
+      "headers": {
+        "Content-Type": "audio/mpeg"
+      },
+      "dest": "/TMWYHI.mp3"
+    },
     { "src": "/styles.css", "dest": "/styles.css" },
     { "src": "/script.js", "dest": "/script.js" },
-    { "src": "/TMWYHI.mp3", "dest": "/TMWYHI.mp3" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

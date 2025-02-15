@@ -306,10 +306,29 @@ class Paper {
         };
         
         // Initialize audio
-        this.audio = new Audio('TMWYHI.mp3');
+        console.log('Attempting to load audio file...');
+        this.audio = new Audio('/TMWYHI.mp3');
         this.audio.loop = true;
         this.audio.volume = 0.5;
-        
+
+        // Add these event listeners for debugging
+        this.audio.addEventListener('error', (e) => {
+            console.error('Audio error details:', {
+                error: this.audio.error,
+                code: this.audio.error.code,
+                message: this.audio.error.message,
+                src: this.audio.src
+            });
+        });
+
+        this.audio.addEventListener('loadstart', () => {
+            console.log('Audio load started');
+        });
+
+        this.audio.addEventListener('loadeddata', () => {
+            console.log('Audio loaded successfully');
+        });
+
         this.element.style.zIndex = '1';
         
         this.reset();
@@ -332,7 +351,13 @@ class Paper {
         // Start falling and playing music
         this.fall();
         this.audio.play().catch(error => {
-            console.log('Audio playback error:', error);
+            console.error('Play error:', error);
+            console.log('Audio state:', {
+                readyState: this.audio.readyState,
+                networkState: this.audio.networkState,
+                src: this.audio.src,
+                currentSrc: this.audio.currentSrc
+            });
         });
 
         // Add event listeners for click/touch
