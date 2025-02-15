@@ -9,6 +9,7 @@
   "routes": [
     { "src": "/styles.css", "dest": "/styles.css" },
     { "src": "/script.js", "dest": "/script.js" },
+    { "src": "/TMWYHI.mp3", "dest": "/TMWYHI.mp3" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
