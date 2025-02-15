@@ -180,8 +180,14 @@ class PetalManager {
         const playButton = document.querySelector('.play-button');
         const overlay = document.querySelector('.play-overlay');
         
-        playButton.addEventListener('click', () => {
-            if (this.state.hasStarted) return;
+        console.log('Setting up play button');  // Debug log
+        
+        playButton.addEventListener('click', (e) => {
+            console.log('Play button clicked');  // Debug log
+            if (this.state.hasStarted) {
+                console.log('Already started, returning');  // Debug log
+                return;
+            }
             
             // Store original state
             this.originalPetals = [...this.activePetals];
@@ -191,10 +197,12 @@ class PetalManager {
             overlay.style.opacity = '0';
             
             setTimeout(() => {
+                console.log('Removing overlay');  // Debug log
                 overlay.remove();
                 this.createPetals(this.config.petalCount);
                 
                 setTimeout(() => {
+                    console.log('Creating paper');  // Debug log
                     if (!this.paper && !this.state.isResizing) {
                         this.paper = new Paper(this);
                     }
@@ -202,10 +210,12 @@ class PetalManager {
             }, this.config.fadeOutDuration);
         });
 
-        // Consider adding for mobile
+        // Add specific mobile touch handler
         playButton.addEventListener('touchstart', (e) => {
+            console.log('Play button touched');  // Debug log
             e.preventDefault(); // Prevent double-firing
-            // ... same code as click ...
+            e.stopPropagation(); // Stop event bubbling
+            playButton.click(); // Trigger the click handler
         });
     }
 

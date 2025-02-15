@@ -93,6 +93,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 2000;
+    pointer-events: auto !important;
 }
 
 .play-button {
@@ -107,6 +108,11 @@ body {
     align-items: center;
     transition: transform 0.3s ease;
     padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 2001;  /* Ensure it's above overlay */
 }
 
 .play-button:hover,
@@ -147,11 +153,9 @@ body {
     }
     
     .play-button {
-        width: 80px;          /* Increased from 60px */
-        height: 80px;         /* Increased from 60px */
-        touch-action: manipulation;  /* Optimize for touch */
-        cursor: pointer;
-        -webkit-tap-highlight-color: transparent;  /* Remove tap highlight on iOS */
+        width: 100px;  /* Even larger touch target for mobile */
+        height: 100px;
+        transform: scale(0.8);  /* Visually maintain size while having larger touch area */
     }
     
     .play-triangle {
@@ -199,7 +203,6 @@ body {
 
     /* Ensure overlay is clickable */
     .play-overlay {
-        pointer-events: auto !important;
         touch-action: manipulation;
     }
 
