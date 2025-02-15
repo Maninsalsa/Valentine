@@ -157,6 +157,16 @@ body {
         width: 90%;  /* Wider card for mobile */
         height: 80vh;
     }
+    
+    .letter-text {
+        font-size: 1.2rem;  /* Slightly smaller font for mobile */
+        padding: 20px;      /* Reduced padding */
+    }
+    
+    .heart {
+        width: 80px;       /* Slightly smaller hearts */
+        height: 80px;
+    }
 }
 
 /* Add close button styling */
