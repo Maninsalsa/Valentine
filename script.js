@@ -212,11 +212,11 @@ class PetalManager {
 
         // Add specific mobile touch handler
         playButton.addEventListener('touchstart', (e) => {
-            console.log('Play button touched');  // Debug log
-            e.preventDefault(); // Prevent double-firing
-            e.stopPropagation(); // Stop event bubbling
-            playButton.click(); // Trigger the click handler
-        });
+            console.log('Play button touched');
+            e.preventDefault();
+            e.stopPropagation();
+            playButton.click();
+        }, { passive: false });
     }
 
     setupResizeHandler() {
@@ -377,10 +377,9 @@ class Paper {
             this.handleInteraction(e);
         });
         this.element.addEventListener('touchstart', (e) => {
-            console.log('Paper touched');
             e.preventDefault();
             this.handleInteraction(e);
-        });
+        }, { passive: false });
 
         // Remove pointer-events: none from container
         document.getElementById('petal-container').style.pointerEvents = 'auto';
