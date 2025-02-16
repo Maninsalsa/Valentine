@@ -509,14 +509,14 @@ class Paper {
                 <div class="heart"></div>
             </div>
             <div class="letter-text">
-                <div class="typewriter">Dear Baby,</div>
-                <div class="typewriter">You are the sexiest, bravest, smartest, and kindest person I've ever met.</div>
-                <div class="typewriter">And I know I'm the luckiest man alive being with you.</div>
+                <div class="typewriter">Dear ____,</div>
+                <div class="typewriter">You are the bravest, smartest, and kindest person I've ever met.</div>
+                <div class="typewriter">And I know I'm the luckiest person alive being with you.</div>
                 <div class="typewriter">We've been through so much, and I know we'll be alright</div>
                 <div class="typewriter">As long as we have each other.</div>
                 <div class="signature">
                     All my love,<br><br>
-                    Robert
+                    ______
                 </div>
             </div>
         `;
