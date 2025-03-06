@@ -21,13 +21,13 @@ class Petal {
     }
 
     applyStyles() {
-        // Set visual properties of the petal element - pink color, rounded shape
+        // Set petal properties: color, rounded shape
         Object.assign(this.element.style, {
             width: this.size + 'px',
             height: this.size + 'px',
             transform: `translate(${this.x}px, ${this.y}px) rotate(${this.rotation}deg)`,
             position: 'absolute',
-            backgroundColor: '#ff5757',  // Light pink color for petals
+            backgroundColor: '#ff5757',  // Valentine themed
             borderRadius: '50% 0 50% 50%', // Petal-like shape
             opacity: '0.8'  // Slight transparency
         });
